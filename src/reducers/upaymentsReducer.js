@@ -11,6 +11,10 @@ export const upaymentsReducer = (state = initState, action) => {
 
     case actionTypes.GET_PRODUCTS:
       return { ...state, products: action.products };
+
+    case actionTypes.GET_CATEGORIES:
+      return { ...state, categories: action.categories };
+
     default:
       return state;
   }
