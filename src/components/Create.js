@@ -20,9 +20,7 @@ const Create = () => {
 
   const [avatar, setAvatar] = useState(null);
   const handleUrl = (value) => {
-    if (
-      value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
-    ) {
+    if (value.match(/^https?:\/\/.+\/.+$/)) {
       setAvatar(value);
       setAlert(null);
     } else {
