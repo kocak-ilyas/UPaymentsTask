@@ -35,11 +35,13 @@ export const getCategories = () => async (dispatch) => {
     console.log(error);
   }
 };
-// export const postApiRequest = async ({ url, data }) => {
-//   return await axios.post(url, data, {
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "application/json;charset=UTF-8",
-//     },
-//   });
-// };
+export const createProduct = async (data) => {
+  await axios
+    .post("https://62286b649fd6174ca82321f1.mockapi.io/case-study/products", data, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    })
+    .then((res) => console.log(`xxxres ==>`, res));
+};
