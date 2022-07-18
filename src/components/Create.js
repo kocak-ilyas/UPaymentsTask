@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Dropdown, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories, createProduct } from "../actions";
+import { Dropdown, Table } from "react-bootstrap";
 import logo from "../assets/upayLogo.png";
 
 const Create = () => {

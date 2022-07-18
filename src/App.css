@@ -1,4 +1,12 @@
 .App {
   text-align: center;
-  background-color: #e4ebf7af;
+}
+
+.navbarContainer {
+  height: 51px;
+  width: 96%;
+  text-align: center;
+  align-items: center;
+  margin: 24px 25px;
+  background-color: rgb(228, 218, 218);
 }
