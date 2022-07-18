@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct, getCategories } from "../actions";
+import { getCategories, createProduct } from "../actions";
 import logo from "../assets/upayLogo.png";
 
 const Create = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.upaymentsReducer.categories);
+  const postResponse = useSelector((state) => state.upaymentsReducer.postResponse);
 
   const [name, setName] = useState(null);
   const handleProductName = (value) => {
@@ -20,12 +21,7 @@ const Create = () => {
 
   const [avatar, setAvatar] = useState(null);
   const handleUrl = (value) => {
-    if (value.match(/^https?:\/\/.+\/.+$/)) {
-      setAvatar(value);
-      setAlert(null);
-    } else {
-      setAlert("Incorrect URL format");
-    }
+    setAvatar(value);
   };
 
   const [category, setCategory] = useState(null);
@@ -40,6 +36,7 @@ const Create = () => {
 
   const [developerEmail, setDeveloperEmail] = useState(null);
   const handleEmail = (value) => {
+    /* eslint-disable */
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
       setDeveloperEmail(value);
       setAlert(null);
@@ -52,7 +49,7 @@ const Create = () => {
 
   const handleProduct = () => {
     if (!alert && name && description && avatar && category && price && developerEmail) {
-      createProduct({ name, description, avatar, category, price, developerEmail });
+      dispatch(createProduct({ name, description, avatar, category, price, developerEmail }));
     } else {
       setAlert("Please fill all inputs correct format!!!");
     }
@@ -151,6 +148,62 @@ const Create = () => {
           <button className='w-100 btn btn-lg btn-primary' type='submit' onClick={() => handleProduct()}>
             Submit
           </button>
+          {postResponse &&
+            (postResponse.status === 201 ? (
+              <div>
+                <h4 className='h3 mb-3 mt-5 fw-normal'>Product Created</h4>
+                <Table striped bordered hover size='sm'>
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>Product Name</strong>
+                      </td>
+                      <td>{postResponse.data.name}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Description</strong>
+                      </td>
+                      <td>{postResponse.data.description}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Image URL</strong>
+                      </td>
+                      <td>{postResponse.data.avatar}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Category</strong>
+                      </td>
+                      <td>{postResponse.data.category}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Price</strong>
+                      </td>
+                      <td>{postResponse.data.price}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>E-mail</strong>
+                      </td>
+                      <td>{postResponse.data.developerEmail}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            ) : (
+              <div className='alert alert-danger d-flex align-items-center' role='alert'>
+                Can not created this product!!!
+              </div>
+            ))}
           <p className='mt-5 mb-3 text-muted'>&copy; 2022</p>
         </div>
       </main>
