@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import { FcHome } from "react-icons/fc";
 
@@ -10,10 +9,10 @@ const Contact = () => {
         className='card d-flex flex-wrap justify-content-between align-items-center'
         style={{ width: `49%`, margin: "15px auto" }}>
         <div className='card-header'>
-          <Link to='/'>
+          <a href='/'>
             <FcHome size={17} />
-            &nbsp;&nbsp;Home
-          </Link>
+            Home
+          </a>
         </div>
         <div
           className='card-body flex-wrap justify-content-between align-items-center py-3 my-4'
