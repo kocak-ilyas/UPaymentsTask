@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Form, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
+import { Card, Col, Container, Form, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProducts, getCategories, getProducts, setSelectedProduct, showProductModal } from "../actions";
 
@@ -8,10 +8,22 @@ const Products = () => {
   const categories = useSelector((state) => state.upaymentsReducer.categories);
   const products = useSelector((state) => state.upaymentsReducer.products);
 
+  const [tempProducts, setTempProducts] = useState([]);
   const handleShowProduct = async (id) => {
     await dispatch(setSelectedProduct(id));
     await dispatch(showProductModal(true));
   };
+
+  const [category, setCategory] = useState(null);
+  const handleCategory = ({ name }) => {
+    setCategory(name);
+  };
+
+  const [searchValue, setSearchValue] = useState("");
+  const handleSearch = (value) => {
+    setSearchValue(value);
+  };
+
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getProducts());
@@ -20,10 +32,16 @@ const Products = () => {
     };
   }, [dispatch]);
 
-  const [category, setCategory] = useState(null);
-  const handleCategory = ({ name }) => {
-    setCategory(name);
-  };
+  useEffect(() => {
+    let filteredArray = products || [];
+    if (category) {
+      filteredArray = filteredArray.filter((product) => product.category === category);
+    }
+    if (searchValue !== "") {
+      filteredArray = filteredArray.filter((product) => product?.name?.includes(searchValue));
+    }
+    setTempProducts(filteredArray);
+  }, [products, category, searchValue]);
 
   return (
     <div style={{ margin: `10px 60px` }}>
@@ -43,46 +61,33 @@ const Products = () => {
               </NavDropdown>
             </Nav>
             <Form className='d-flex'>
-              <Form.Control type='search' placeholder='Search' className='me-2' aria-label='Search' />
-              <Button variant='outline-success'>Search</Button>
+              <Form.Control
+                type='search'
+                placeholder='Search'
+                className='me-2'
+                aria-label='Search'
+                onChange={(e) => handleSearch(e.target.value)}
+              />
             </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
       <Row xs={2} md={3} lg={3} xxl={4} className='g-4'>
-        {products.map((product, index) =>
-          category === null ? (
-            <Col key={index} style={{ cursor: `pointer` }} onClick={() => handleShowProduct(product.id)}>
-              <Card style={{ paddingTop: `20px` }}>
-                <Card.Img
-                  variant='top'
-                  src={product.avatar}
-                  style={{ width: "12rem", height: "12rem", margin: "auto" }}
-                />
-                <Card.Body>
-                  <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>{product.price}$</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ) : (
-            category === product.category && (
-              <Col key={index} style={{ cursor: `pointer` }} onClick={() => handleShowProduct(product.id)}>
-                <Card style={{ paddingTop: `20px` }}>
-                  <Card.Img
-                    variant='top'
-                    src={product.avatar}
-                    style={{ width: "12rem", height: "12rem", margin: "auto" }}
-                  />
-                  <Card.Body>
-                    <Card.Title>{product.name}</Card.Title>
-                    <Card.Text>{product.price}$</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            )
-          )
-        )}
+        {tempProducts.map((product, index) => (
+          <Col key={index} style={{ cursor: `pointer` }} onClick={() => handleShowProduct(product.id)}>
+            <Card style={{ paddingTop: `20px` }}>
+              <Card.Img
+                variant='top'
+                src={product.avatar}
+                style={{ width: "12rem", height: "12rem", margin: "auto" }}
+              />
+              <Card.Body>
+                <Card.Title>{product.name}</Card.Title>
+                <Card.Text>{product.price}$</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
       </Row>
     </div>
   );
