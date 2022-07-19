@@ -123,7 +123,7 @@ const Create = () => {
                       {category || "Categories"}
                     </Dropdown.Toggle>
                     <Dropdown.Menu
-                      className='createCategory shadow pl-3 pr-3 mb-5 bg-body rounded'
+                      className='createCategory shadow pl-3 pr-3 bg-body rounded'
                       style={{ width: "459px" }}>
                       {categories.map(({ id, name }) => (
                         <Dropdown.Item key={id} onClick={() => handleCategory(name)} className='createElement'>
