@@ -1,4 +1,4 @@
-import * as actionTypes from "../private/constants";
+import * as actionTypes from "../reducers/constants";
 import axios from "axios";
 const apiUrlHeader = `https://62286b649fd6174ca82321f1.mockapi.io/case-study/`;
 

@@ -1,4 +1,4 @@
-import * as actionTypes from "../private/constants";
+import * as actionTypes from "./constants";
 const initState = {
   products: [],
   categories: [],
