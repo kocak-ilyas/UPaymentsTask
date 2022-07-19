@@ -1,11 +1,23 @@
-import { Container, Navbar } from "react-bootstrap";
-import { Link, Route, Routes } from "react-router-dom";
-import "./App.css";
-import Create from "./components/Create";
-import Home from "./components/Home";
+import React from "react";
+// import { Link, Route, Routes } from "react-router-dom";
 import Products from "./components/Products";
+import Create from "./components/Create";
+// import Home from "./components/Home";
+
+// import { Container, Navbar } from "react-bootstrap";
+import { Container, Navbar } from "react-bootstrap";
+import { FcPlus } from "react-icons/fc";
+import "./App.css";
+import { showCreateModal } from "./actions";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const isCreateModal = useSelector((state) => state.upaymentsReducer.isCreateModal);
+
+  const handleShowCreateModal = () => {
+    dispatch(showCreateModal(true));
+  };
   return (
     <div className='App'>
       <div className='navbarContainer shadow pl-3 pr-3 mb-5 bg-body rounded'>
@@ -13,6 +25,10 @@ function App() {
           <Container>
             <Navbar.Brand href='/'>UPayments Store</Navbar.Brand>
             <Navbar.Collapse className='justify-content-end'>
+              <Navbar.Text style={{ marginRight: `50px`, cursor: "pointer" }} onClick={() => handleShowCreateModal()}>
+                <FcPlus size={25} />
+                &nbsp;&nbsp;Add Product
+              </Navbar.Text>
               <Navbar.Text>Register</Navbar.Text>
             </Navbar.Collapse>
           </Container>
@@ -26,14 +42,14 @@ function App() {
           </div>
         </footer>
       </div>
+      {isCreateModal && <Create />}
     </div>
   );
 }
 
 export default App;
 
-{
-  /* <div>
+/* <div>
   <ul>
     <li key='Home'>
       <Link to='/'>Home</Link>
@@ -51,4 +67,3 @@ export default App;
   <Route path='/products' element={<Products />} />
   <Route path='/create' element={<Create />} />
 </Routes>  */
-}

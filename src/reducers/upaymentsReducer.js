@@ -2,6 +2,7 @@ import * as actionTypes from "../private/constants";
 const initState = {
   products: [],
   categories: [],
+  isCreateModal: false,
   postResponse: null,
 };
 
@@ -15,6 +16,9 @@ export const upaymentsReducer = (state = initState, action) => {
 
     case actionTypes.GET_PRODUCTS:
       return { ...state, products: action.products };
+
+    case actionTypes.IS_CREATE_MODAL:
+      return { ...state, isCreateModal: action.isCreateModal };
 
     case actionTypes.CLEAR_CREATE_RESPONSE:
       return { ...state, postResponse: null };

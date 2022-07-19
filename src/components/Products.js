@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Dropdown, Form, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProducts, getCategories, getProducts } from "../actions";
 
