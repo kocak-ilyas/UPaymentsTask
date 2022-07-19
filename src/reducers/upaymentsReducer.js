@@ -4,6 +4,9 @@ const initState = {
   categories: [],
   isCreateModal: false,
   postResponse: null,
+  selectedProductDetails: null,
+  isProductModal: false,
+  deleteResponse: null,
 };
 
 export const upaymentsReducer = (state = initState, action) => {
@@ -25,6 +28,18 @@ export const upaymentsReducer = (state = initState, action) => {
 
     case actionTypes.CREATE_PRODUCTS:
       return { ...state, postResponse: action.postResponse };
+
+    case actionTypes.IS_PRODUCT_MODAL:
+      return { ...state, isProductModal: action.isProductModal };
+
+    case actionTypes.CLEAR_SELECTED_PRODUCT:
+      return { ...state, selectedProductDetails: null };
+
+    case actionTypes.SET_SELECTED_PRODUCT:
+      return { ...state, selectedProductDetails: action.selectedProductDetails };
+
+    case actionTypes.DELETE_PRODUCTS:
+      return { ...state, deleteResponse: action.deleteResponse };
 
     default:
       return state;

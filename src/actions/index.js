@@ -1,9 +1,10 @@
 import * as actionTypes from "../private/constants";
 import axios from "axios";
+const apiUrlHeader = `https://62286b649fd6174ca82321f1.mockapi.io/case-study/`;
 
 export const getCategories = () => async (dispatch) => {
   try {
-    await axios.get(`https://62286b649fd6174ca82321f1.mockapi.io/case-study/categories/`).then((response) => {
+    await axios.get(apiUrlHeader + `categories/`).then((response) => {
       dispatch({ type: actionTypes.GET_CATEGORIES, categories: response.data });
     });
   } catch (error) {
@@ -21,7 +22,7 @@ export const clearProducts = () => async (dispatch) => {
 
 export const getProducts = () => async (dispatch) => {
   try {
-    await axios.get(`https://62286b649fd6174ca82321f1.mockapi.io/case-study/products/`).then((response) => {
+    await axios.get(apiUrlHeader + `products/`).then((response) => {
       dispatch({ type: actionTypes.GET_PRODUCTS, products: response.data });
     });
   } catch (error) {
@@ -41,7 +42,7 @@ export const showCreateModal = (value) => async (dispatch) => {
 export const createProduct = (data) => async (dispatch) => {
   try {
     await axios
-      .post("https://62286b649fd6174ca82321f1.mockapi.io/case-study/products", data, {
+      .post(apiUrlHeader + `products`, data, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",
@@ -50,6 +51,35 @@ export const createProduct = (data) => async (dispatch) => {
       .then((response) => {
         dispatch({ type: actionTypes.CREATE_PRODUCTS, postResponse: response });
       });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const showProductModal = (value) => async (dispatch) => {
+  try {
+    await dispatch({ type: actionTypes.IS_PRODUCT_MODAL, isProductModal: value });
+    !value && (await dispatch({ type: actionTypes.CLEAR_SELECTED_PRODUCT }));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const setSelectedProduct = (id) => async (dispatch) => {
+  try {
+    await axios.get(apiUrlHeader + `products/${id}`).then((response) => {
+      dispatch({ type: actionTypes.SET_SELECTED_PRODUCT, selectedProductDetails: response.data });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteProduct = (id) => async (dispatch) => {
+  try {
+    await axios.delete(apiUrlHeader + `products/${id}`).then((response) => {
+      dispatch({ type: actionTypes.DELETE_PRODUCTS, deleteResponse: response });
+    });
   } catch (error) {
     console.log(error);
   }

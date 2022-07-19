@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { clearProducts, getCategories, getProducts } from "../actions";
+import { clearProducts, getCategories, getProducts, setSelectedProduct, showProductModal } from "../actions";
 
 const Products = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.upaymentsReducer.categories);
   const products = useSelector((state) => state.upaymentsReducer.products);
 
+  const handleShowProduct = async (id) => {
+    await dispatch(setSelectedProduct(id));
+    await dispatch(showProductModal(true));
+  };
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getProducts());
@@ -45,11 +49,10 @@ const Products = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
       <Row xs={2} md={3} lg={3} xxl={4} className='g-4'>
         {products.map((product, index) =>
           category === null ? (
-            <Col key={index}>
+            <Col key={index} style={{ cursor: `pointer` }} onClick={() => handleShowProduct(product.id)}>
               <Card style={{ paddingTop: `20px` }}>
                 <Card.Img
                   variant='top'
@@ -64,7 +67,7 @@ const Products = () => {
             </Col>
           ) : (
             category === product.category && (
-              <Col key={index}>
+              <Col key={index} style={{ cursor: `pointer` }} onClick={() => handleShowProduct(product.id)}>
                 <Card style={{ paddingTop: `20px` }}>
                   <Card.Img
                     variant='top'

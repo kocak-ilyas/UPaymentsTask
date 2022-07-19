@@ -1,6 +1,7 @@
 import React from "react";
 // import { Link, Route, Routes } from "react-router-dom";
 import Products from "./components/Products";
+import Product from "./components/Product";
 import Create from "./components/Create";
 // import Home from "./components/Home";
 
@@ -14,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 function App() {
   const dispatch = useDispatch();
   const isCreateModal = useSelector((state) => state.upaymentsReducer.isCreateModal);
+  const isProductModal = useSelector((state) => state.upaymentsReducer.isProductModal);
 
   const handleShowCreateModal = () => {
     dispatch(showCreateModal(true));
@@ -43,6 +45,7 @@ function App() {
         </footer>
       </div>
       {isCreateModal && <Create />}
+      {isProductModal && <Product />}
     </div>
   );
 }
