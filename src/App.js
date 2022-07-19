@@ -1,16 +1,14 @@
 import React from "react";
-// import { Link, Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { showCreateModal } from "./actions";
+
 import Products from "./components/Products";
 import Product from "./components/Product";
 import Create from "./components/Create";
-// import Home from "./components/Home";
 
-// import { Container, Navbar } from "react-bootstrap";
 import { Container, Navbar } from "react-bootstrap";
 import { FcPlus } from "react-icons/fc";
-import "./App.css";
-import { showCreateModal } from "./actions";
-import { useDispatch, useSelector } from "react-redux";
+import "./App.scss";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,22 +49,3 @@ function App() {
 }
 
 export default App;
-
-/* <div>
-  <ul>
-    <li key='Home'>
-      <Link to='/'>Home</Link>
-    </li>
-    <li key='Products'>
-      <Link to='/products'>Products</Link>
-    </li>
-    <li key='Create'>
-      <Link to='/create'>Create</Link>
-    </li>
-  </ul>
-</div>
-<Routes>
-  <Route path='/' element={<Home />} />
-  <Route path='/products' element={<Products />} />
-  <Route path='/create' element={<Create />} />
-</Routes>  */

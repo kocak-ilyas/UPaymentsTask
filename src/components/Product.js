@@ -1,7 +1,8 @@
 import React from "react";
+import { showProductModal, deleteProduct, getProducts } from "../actions";
+
 import { Button, Col, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { showProductModal, deleteProduct, getProducts } from "../actions";
 
 const Product = () => {
   const dispatch = useDispatch();

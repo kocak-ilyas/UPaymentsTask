@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Container, Form, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProducts, getCategories, getProducts, setSelectedProduct, showProductModal } from "../actions";
+
+import { Card, Col, Container, Form, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 
 const Products = () => {
   const dispatch = useDispatch();

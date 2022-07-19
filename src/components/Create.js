@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories, showCreateModal, createProduct, getProducts } from "../actions";
+
 import { Button, Dropdown, Modal, Table } from "react-bootstrap";
 import logo from "../assets/upayLogo.png";
 
@@ -71,12 +72,12 @@ const Create = () => {
         <Modal.Title>UPayments</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className='text-center pageBody createContainer'>
+        <div className='text-center pageBody'>
           {!postResponse ? (
             <main className='form-signin'>
               <div>
                 <h1 className='h3 mb-3 fw-normal'>Create Product</h1>
-                <div className='form-floating createGroup'>
+                <div className='form-floating'>
                   <input
                     type='text'
                     className='form-control'
@@ -88,7 +89,7 @@ const Create = () => {
                   <label htmlFor='formProductName'>Product Name</label>
                 </div>
                 <br />
-                <div className='form-floating createGroup'>
+                <div className='form-floating'>
                   <textarea
                     style={{ minHeight: `90px` }}
                     rows={3}
@@ -101,7 +102,7 @@ const Create = () => {
                   <label htmlFor='formDescription'>Description</label>
                 </div>
                 <br />
-                <div className='form-floating createGroup'>
+                <div className='form-floating'>
                   <input
                     type='url'
                     className='form-control'
@@ -113,20 +114,17 @@ const Create = () => {
                   <label htmlFor='formImageUrl'>Image URL</label>
                 </div>
                 <br />
-                <div className='form-floating createGroup'>
-                  <Dropdown className='createElement createCategory'>
+                <div className='form-floating'>
+                  <Dropdown>
                     <Dropdown.Toggle
                       variant='secondary'
                       id='dropdown-basic'
-                      className='createCategory'
                       style={{ fontSize: `16px`, width: "459px" }}>
                       {category || "Categories"}
                     </Dropdown.Toggle>
-                    <Dropdown.Menu
-                      className='createCategory shadow pl-3 pr-3 bg-body rounded'
-                      style={{ width: "459px" }}>
+                    <Dropdown.Menu className='shadow pl-3 pr-3 bg-body rounded' style={{ width: "459px" }}>
                       {categories.map(({ id, name }) => (
-                        <Dropdown.Item key={id} onClick={() => handleCategory(name)} className='createElement'>
+                        <Dropdown.Item key={id} onClick={() => handleCategory(name)}>
                           {name}
                         </Dropdown.Item>
                       ))}
@@ -134,7 +132,7 @@ const Create = () => {
                   </Dropdown>
                 </div>
                 <br />
-                <div className='form-floating createGroup'>
+                <div className='form-floating'>
                   <input
                     type='number'
                     className='form-control'
@@ -146,7 +144,7 @@ const Create = () => {
                   <label htmlFor='formPrice'>Price</label>
                 </div>
                 <br />
-                <div className='form-floating createGroup'>
+                <div className='form-floating'>
                   <input
                     type='developerEmail'
                     pattern='.+@globex\.com'
