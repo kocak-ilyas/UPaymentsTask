@@ -3,9 +3,13 @@
 }
 
 .navbarContainer {
-  height: 51px;
-  width: 93%;
+  height: 59px;
+  width: 100%;
   text-align: center;
   align-items: center;
-  margin: 16px 59px;
+  margin-bottom: 16px;
+}
+
+.collapse:not(.show) {
+  display: block !important;
 }

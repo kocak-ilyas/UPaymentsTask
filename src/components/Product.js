@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Col, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { showProductModal, deleteProduct, getProducts } from "../actions";
 
@@ -18,19 +18,29 @@ const Product = () => {
   };
 
   return (
-    <Modal show={true} onHide={handleShowProductModal} backdrop='static' keyboard={false}>
+    <Modal show={true} onHide={handleShowProductModal} backdrop='static' keyboard={false} size='lg'>
       <Modal.Header closeButton>
         <Modal.Title>Product Detail</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <img src={selectedProductDetails.avatar} alt='' />
-        <h1>category: {selectedProductDetails.category}</h1>
-        <h1>createdAt: {selectedProductDetails.createdAt}</h1>
-        <p>description: {selectedProductDetails.description}</p>
-        <h1>developerEmail: {selectedProductDetails.developerEmail}</h1>
-        <h1>id: {selectedProductDetails.id}</h1>
-        <h1>name: {selectedProductDetails.name}</h1>
-        <h1>price: {selectedProductDetails.price}</h1>
+        <Row>
+          <Col xs={5}>
+            <img
+              src={selectedProductDetails.avatar}
+              alt='avatar'
+              style={{ objectFit: `cover`, width: "100%", height: "100%", borderRadius: "19px" }}
+            />
+          </Col>
+          <Col xs={7}>
+            <h1 style={{ margin: `15px auto 50px 0px`, display: "flex" }}>{selectedProductDetails.name}</h1>
+            <span style={{ marginTop: `139px`, display: "flex", fontSize: "22px" }}>
+              $&nbsp;{selectedProductDetails.price}
+            </span>
+          </Col>
+        </Row>
+        <hr />
+        <h3 style={{ textAlign: "left" }}>Description</h3>
+        <p style={{ textAlign: "justify" }}>{selectedProductDetails.description}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant='secondary' onClick={() => handleShowProductModal()}>

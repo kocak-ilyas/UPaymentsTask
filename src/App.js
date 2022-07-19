@@ -24,7 +24,7 @@ function App() {
     <div className='App'>
       <div className='navbarContainer shadow pl-3 pr-3 mb-5 bg-body rounded'>
         <Navbar>
-          <Container>
+          <Container fluid className='mx-5'>
             <Navbar.Brand href='/'>UPayments Store</Navbar.Brand>
             <Navbar.Collapse className='justify-content-end'>
               <Navbar.Text style={{ marginRight: `50px`, cursor: "pointer" }} onClick={() => handleShowCreateModal()}>
